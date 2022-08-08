@@ -28,7 +28,7 @@ pub struct Args {
 
     /// Run the analysis on the full population
     /// Small hack as clap does not handle bools properly
-    #[clap(short, long, parse(try_from_str), default_value = "true")]
+    #[clap(short, long, parse(try_from_str), default_value = "false")]
     pub full_population: bool,
 }
 
