@@ -419,7 +419,7 @@ We _should_ only see this occur once every 3 years using a Poisson Probability. 
 
 _How many times has the above happened so far in the history of Bitcoin?_
 
-According to the analysis of the full population set, this has occurred 152 times as of block height 748472. The longest period occuring on 2009-01-08 at height 1 (immediately following the genesis block) clocking in at over 5 1/3 days.
+According to the analysis of the full population set, this has occurred 152 times as of block height 748472. The longest period occuring on 2009-01-08 with block [00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048](https://bitcoinexplorer.org/block/00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048) at height 1 (immediately following the genesis block) clocking in at over 5 1/3 days.
 
 A [great article](https://minerdaily.com/2022/bitcoins-poisson-paradox/) on this phenomenon, so-called Bitcoin's "Poisson Paradox" which dives further into the topic.
 
