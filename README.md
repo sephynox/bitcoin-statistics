@@ -32,7 +32,7 @@ Every 27126 hours / 1130 days / 3 years.
 
 ---
 
-### Testing The Assumption
+### Testing the Assumption
 
 At the time of this writing, there are over 748k blocks which gives us a fairly large population size. I decided to take a random sampling of the data using the Cochran Formula to determine the sample size to compare against the assumptions.
 One caveat is the inherit reliability of the data as block timestamps are not 100% accurate. As they are miner provided, the rule is that they fall within a two-hour window of network adjusted time and are greater than the median of the past 11 blocks. See [BIP-113](https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki).
