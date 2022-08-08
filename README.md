@@ -1,4 +1,9 @@
-# bitcoin-statistics
+# bitcoin-statistics [![quality_status]][quality] [![unit_status]][unit]
+
+[unit_status]: https://github.com/sephynox/bitcoin-statistics/actions/workflows/unit_test.yml/badge.svg
+[unit]: https://github.com/sephynox/bitcoin-statistics/actions/workflows/unit_test.yml
+[quality_status]: https://github.com/sephynox/bitcoin-statistics/actions/workflows/quality_test.yml/badge.svg
+[quality]: https://github.com/sephynox/bitcoin-statistics/actions/workflows/quality_test.yml
 
 Simple application for running analysis on the Bitcoin network over the bitcoind JSON RPC.
 
@@ -94,7 +99,7 @@ Sampling 9480 blocks from a population of 748444
 
 Here, we have a total of 5 incidents where consecutive blocks exceed 2-hour intervals. Block hash [00000000de6d334392a180078b3d0086284e3d5e375e7da3d303d6569ef56b73](https://bitcoinexplorer.org/block/00000000de6d334392a180078b3d0086284e3d5e375e7da3d303d6569ef56b73) mined on 2009-08-22 at height 21446 being the longest in this sampling clocking in at over 6.5 hours.
 
-As a result, I added the option to run a statistical anlysis using the entire population set. This of course, took far longer to complete but provided a full picture:
+As a result, I added the option to run a statistical analysis using the entire population set. This of course, took far longer to complete but provided a full picture:
 
 ```shell
 Using total population of 748472
