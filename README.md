@@ -4,8 +4,6 @@ Simple application for running analysis on the Bitcoin network over the bitcoind
 
 ## About
 
----
-
 Run a statistical analysis of the Bitcoin blockchain to answer the following questions:
 
 1. How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other?
@@ -13,15 +11,11 @@ Run a statistical analysis of the Bitcoin blockchain to answer the following que
 
 ## Setup
 
----
-
 In order to utilize this program, you will need to setup a TOML config file to connect to your bitcoind RPC endpoint. You can also utilize ENV variables prefixed with `APP_`. See the `src/config.example.toml` file for more details on fields to configure.
 
 Note: If you are running Umbrel, it is best to forward 127.0.0.1:PORT to umbrel.local:8332. You can setup a temporary SSH forward using `shell ssh -f -L 8000:127.0.0.1:8332 umbrel@umbrel.local sleep 1000;`
 
 ## Process
-
----
 
 I decided that because I run my own node, I can access the blockchain data directly. I chose to use Rust as that is a language I enjoy using. This could also (more easily) be done using Python.
 
@@ -419,8 +413,6 @@ Using total population of 748472
 
 ## Conclusions
 
----
-
 _How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other?_
 
 We _should_ only see this occur once every 3 years using a Poisson Probability. However, according to the full population analysis, we see the actual probability of this occuring being far higher. Using the entire population data set, the probability of two consecutive blocks mined more than 2 hours apart from each other is 1 in every 4,924 blocks. This equates to about once a month.
@@ -432,8 +424,6 @@ According to the analysis of the full population set, this has occurred 152 time
 A [great article](https://minerdaily.com/2022/bitcoins-poisson-paradox/) on this phenomenon, so-called Bitcoin's "Poisson Paradox" which dives further into the topic.
 
 ## Improvements
-
----
 
 Possible future improvements:
 
