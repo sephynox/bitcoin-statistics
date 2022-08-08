@@ -298,7 +298,7 @@ async fn get_blocks(block_heights: Vec<u64>, client: Arc<Client>) -> Result<Vec<
 
     for handle in handles {
         if let Ok(block) = handle.await {
-            progress_bar.set_message(format!("Fetched block {}", block.block_hash().to_string()));
+            progress_bar.set_message(format!("Fetched block {}", block.block_hash()));
             result.push(block);
         } else {
             progress_bar.println("Error retrieving block");
