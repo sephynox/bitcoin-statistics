@@ -21,7 +21,7 @@ I decided that because I run my own node, I can access the blockchain data direc
 
 ### Assumptions
 
-We know that the Bitcoin network attempts to maintain mining of blocks ocurring with a 10-minute window. This would give us about 6 blocks per hour. Thus, as the Bitcoin protocol attempts to provide a fixed-time block mining, we can assume a Poisson distribution. This would provide us with the formula 1 / (λ x E ^ (-2 x λ)) where λ = 6. I used [a few](https://stattrek.com/probability-distributions/poisson) [online sources](https://www.sciencedirect.com/topics/mathematics/poisson-distribution) to assist me with these calculations as math is not my fondest skill. Using this, we get the following expectations for probability of seeing two consecutive blocks being mined over 2 hours apart:
+We know that the Bitcoin network attempts to maintain mining of blocks ocurring within a 10-minute window. This would give us about 6 blocks per hour. Thus, as the Bitcoin protocol attempts to provide a fixed-time block mining, we can assume a Poisson distribution. This would provide us with the formula 1 / (λ x E ^ (-2 x λ)) where λ = 6. I used [a few](https://stattrek.com/probability-distributions/poisson) [online sources](https://www.sciencedirect.com/topics/mathematics/poisson-distribution) to assist me with these calculations as math is not my fondest skill. Using this, we get the following expectations for probability of seeing two consecutive blocks being mined over 2 hours apart:
 
 Every 27126 hours / 1130 days / 3 years.
 
@@ -29,7 +29,7 @@ Every 27126 hours / 1130 days / 3 years.
 
 ### Testing The Assumption
 
-Since at the time of this writing there are over 748k blocks, we have a fairly large population size. I decided to take a random sampling of the data using the Cochran Formula to determine the sample size and compare against the assumptions.
+At the time of this writing, there are over 748k blocks which gives us a fairly large population size. I decided to take a random sampling of the data using the Cochran Formula to determine the sample size to compare against the assumptions.
 One caveat is the inherit reliability of the data as block timestamps are not 100% accurate. As they are miner provided, the rule is that they fall within a two-hour window of network adjusted time and are greater than the median of the past 11 blocks. See [BIP-113](https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki).
 
 #### Data
@@ -415,7 +415,7 @@ Using total population of 748472
 
 _How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other?_
 
-We _should_ only see this occur once every 3 years using a Poisson Probability. However, according to the full population analysis, we see the actual probability of this occuring being far higher. Using the entire population data set, the probability of two consecutive blocks mined more than 2 hours apart from each other is 1 in every 4,924 blocks. This equates to about once a month.
+We _should_ only see this occur once every 3 years using the Poisson distribution. However, according to the full population analysis, we see this occuring in practice far more often. Using the entire population data set, the probability of two consecutive blocks mined more than 2 hours apart from each other is 1 in every 4,924 blocks. This equates to about once a month.
 
 _How many times has the above happened so far in the history of Bitcoin?_
 
