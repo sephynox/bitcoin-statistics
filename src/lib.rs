@@ -195,8 +195,6 @@ impl BlockSample {
 impl BlockStatistics for BlockSampleData {
     fn fetch_block_time_drift(self, drift_time: i64, window: u64, sample: bool) {
         let window = window as usize;
-        // Step interval
-        let step = if window < 3 { 1 } else { window - 1 };
         // Store the data in a binary heap to bubble up the longest drifts
         let mut heap: BlockHeap = BinaryHeap::new();
         // Result formatting for sample data
@@ -205,11 +203,11 @@ impl BlockStatistics for BlockSampleData {
         let mut block_deltas = vec![];
 
         // Add the blocks to the heap by their timestamp difference
-        self.0.windows(window).step_by(step).for_each(|blocks| {
+        self.0.windows(window).step_by(window).for_each(|blocks| {
             let mut prev = &blocks[0];
+
             blocks.iter().skip(1).for_each(|block| {
                 let drift = (block.time as i64).checked_sub(prev.time as i64);
-
                 if let Some(time) = drift {
                     block_deltas.push(time as f64 / 60.0);
                     // Pushing to the heap after iterating blocks gives us
