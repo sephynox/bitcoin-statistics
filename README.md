@@ -18,7 +18,7 @@ Run a statistical analysis of the Bitcoin blockchain to answer the following que
 
 In order to utilize this program, you will need to setup a TOML config file to connect to your bitcoind RPC endpoint. You can also utilize ENV variables prefixed with `APP_`. See the `src/config.example.toml` file for more details on fields to configure.
 
-Note: If you are running Umbrel, it is best to forward 127.0.0.1:PORT to umbrel.local:8332. You can setup a temporary SSH forward using `shell ssh -f -L 8000:127.0.0.1:8332 umbrel@umbrel.local sleep 1000;`
+Note: If you are running Umbrel, it is best to forward 127.0.0.1:PORT to umbrel.local:8332. You can setup a temporary SSH forward using `ssh -f -L 8000:127.0.0.1:8332 umbrel@umbrel.local sleep 1000;`
 
 ## Process
 
