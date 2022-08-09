@@ -20,6 +20,44 @@ In order to utilize this program, you will need to setup a TOML config file to c
 
 Note: If you are running Umbrel, it is best to forward 127.0.0.1:PORT to umbrel.local:8332. You can setup a temporary SSH forward using `ssh -f -L 8000:127.0.0.1:8332 umbrel@umbrel.local sleep 1000;`
 
+## Usage
+
+```shell
+Run statistical analysis on Bitcoin blocks
+
+USAGE:
+    bitcoin-statistics [OPTIONS] <SUBCOMMAND>
+
+OPTIONS:
+    -c, --config <CONFIG>
+            Path to config file if applicable [default: src/config]
+
+    -f, --full-population <FULL_POPULATION>
+            Run the analysis on the full population Small hack as clap does not handle bools
+            properly [default: true]
+
+    -h, --help
+            Print help information
+
+    -m, --margin-error <MARGIN_ERROR>
+            Margin of error for sampling [default: 0.05]
+
+    -s, --std-deviation <STD_DEVIATION>
+            Standard deviation for sampling [default: 0.5]
+
+    -V, --version
+            Print version information
+
+    -z, --z-score <Z_SCORE>
+            Z-Score for sampling [default: 1.96]
+
+SUBCOMMANDS:
+    block-time-drift    Run the drift time analysis using a drift time as unix seconds
+    help                Print this message or the help of the given subcommand(s)
+```
+
+Once configuration to your local bitcoind RPC node is setup, you can simply run `cargo run block-time-drift` to run the default statistical analysis. You can output the results to a file normally, `cargo run block-time-drift > output.txt`
+
 ## Process
 
 I decided that because I run my own node, I can access the blockchain data directly. I chose to use Rust as that is a language I enjoy using. This could also (more easily) be done using Python.
