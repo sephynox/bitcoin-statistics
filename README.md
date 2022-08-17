@@ -474,6 +474,6 @@ A [great article](https://minerdaily.com/2022/bitcoins-poisson-paradox/) on this
 
 Possible future improvements:
 
-[x] Zeroize sensitive data
-[ ] Saving a local copy of any blocks that have been previously queried
-[ ] Add more analytics
+- [x] Zeroize sensitive data
+- [ ] Saving a local copy of any blocks that have been previously queried
+- [ ] Add more analytics
