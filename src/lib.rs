@@ -7,6 +7,7 @@ use std::{collections::BinaryHeap, path::PathBuf, sync::Arc};
 use tabled::{Footer, Header, Table, Tabled};
 use thiserror::Error;
 use tokio::task::JoinError;
+use zeroize::ZeroizeOnDrop;
 
 use crate::utils::*;
 
@@ -27,7 +28,8 @@ pub enum StatisticsError {
 }
 
 /// Configurations required for connecting to bitcoind via RPC.
-#[derive(Deserialize)]
+/// Call zeroize when the config is no longer needed.
+#[derive(Deserialize, ZeroizeOnDrop)]
 pub struct ClientConfig {
     host: String,
     username: String,
@@ -35,7 +37,7 @@ pub struct ClientConfig {
 }
 
 /// Configuration for sampling data from the network.
-#[derive(Debug)]
+#[derive(Clone, PartialEq, PartialOrd, Debug)]
 pub struct BlockSample {
     z_score: f64,
     margin_error: f64,
@@ -44,28 +46,14 @@ pub struct BlockSample {
 }
 
 /// Collected sample data ready for analysis.
-#[derive(Debug)]
+#[derive(Clone, PartialEq, Debug)]
 pub struct BlockSampleData(Vec<BlockHeader>);
 
 /// Use a struct to store the drift and blocks for a binary heap.
 /// Doubles as the sample table.
-#[derive(Tabled, Eq, PartialEq, Debug)]
+#[derive(Tabled, Clone, Eq, PartialEq, Debug)]
 pub struct BlockTimeDriftTable {
     #[tabled(rename = "Mining Time", order = 2, display_with = "display_mins")]
-    drift: i64,
-    #[tabled(rename = "Parent Block Hash", order = 0)]
-    parent_hash: String,
-    #[tabled(rename = "Child Block Hash", order = 1)]
-    child_hash: String,
-}
-
-/// Table for showing the Poission distribution of the sampled data.
-/// In theory, due to Bitoin's target difficulty, this distribution should
-/// be as such that the 95% percentile of block times should fall within
-/// the 10-minute range.
-#[derive(Tabled, Eq, PartialEq, Debug)]
-pub struct BlockTimePoissonTable {
-    #[tabled(rename = "Mining Time", order = 2)]
     drift: i64,
     #[tabled(rename = "Parent Block Hash", order = 0)]
     parent_hash: String,
@@ -177,7 +165,7 @@ impl BlockSample {
         let mut rng = rand::thread_rng();
         let mut result: Vec<u64> = Vec::new();
 
-        // O(n) time windowing for allowing contigous sample blocks
+        // O(n) time windowing for allowing contiguous sample blocks
         for _ in 0..(self.get_sample_size(block_max) / window) {
             let mut sample = rng.sample(&range);
             result.push(sample);
@@ -270,12 +258,17 @@ pub fn fetch_settings(config_path: PathBuf) -> Result<ClientConfig> {
 /// Return a new bitcoin RPC client using the specified configuration.
 pub fn fetch_client(config: ClientConfig) -> Result<Client> {
     println!("Connecting to: {}...", config.host);
+
     let client = Client::new(
         &config.host,
-        Auth::UserPass(config.username, config.password),
+        // TODO: Bitcoin RPC needs to zeroize but does not currently
+        Auth::UserPass(config.username.to_owned(), config.password.to_owned()),
     )?;
 
-    println!("Connectied to: {}!", config.host);
+    println!("Connected to: {}!", config.host);
+
+    // Clear sensitive information (ZeroizeOnDrop)
+    drop(config);
     Ok(client)
 }
 

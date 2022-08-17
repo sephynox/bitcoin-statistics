@@ -11,7 +11,7 @@ Simple application for running analysis on the Bitcoin network over the bitcoind
 
 Run a statistical analysis of the Bitcoin blockchain to answer the following questions:
 
-1. How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other?
+1. How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart?
 2. How many times has the above happened so far in the history of Bitcoin?
 
 ## Setup
@@ -464,11 +464,16 @@ _How many times has the above happened so far in the history of Bitcoin?_
 
 According to the analysis of the full population set, this has occurred 152 times as of block height 748472. The longest period occuring on 2009-01-08 with block [00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048](https://bitcoinexplorer.org/block/00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048) at height 1 (immediately following the genesis block) clocking in at over 5 1/3 days.
 
+### Discussion
+
+As time goes on, we should see blocks being mined more closely to the 10-minute target with a reducing frequency of large drifts such as over 2 hours. The majority of occurrences have happened in 2009 and during the early days of the network. As such, the distribution is skewed with a long right tail.
+
 A [great article](https://minerdaily.com/2022/bitcoins-poisson-paradox/) on this phenomenon, so-called Bitcoin's "Poisson Paradox" which dives further into the topic.
 
 ## Improvements
 
 Possible future improvements:
 
-- Saving a local copy of any blocks that have been previously queried
-- Add more analytics
+[x] Zeroize sensitive data
+[ ] Saving a local copy of any blocks that have been previously queried
+[ ] Add more analytics

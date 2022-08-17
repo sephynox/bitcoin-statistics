@@ -8,11 +8,10 @@ mod cli;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
+    // Parses CLI arguments
     let cli = cli::Args::parse();
-    // Pull in settings for connecting a bitcoind
-    let settings = fetch_settings(PathBuf::from(cli.config))?;
     // Fetch the RPC client
-    let rpc = fetch_client(settings)?;
+    let rpc = fetch_client(fetch_settings(PathBuf::from(cli.config))?)?;
     // Create a new sample based on inputs
     let sample = BlockSample::new(
         cli.z_score,

@@ -15,6 +15,7 @@ clap = { version = "3.2.16", features = ["derive"] }
 indicatif = "0.17.0"
 tabled = "0.8.0"
 rand = "0.8.5"
+zeroize = { version = "1.5.7", features = ["std", "zeroize_derive"] }
 
 [dev-dependencies.cargo-husky]
 version = "1"
